@@ -65,6 +65,6 @@ O RSA é vital, embora seja mais lento que algoritmos simétricos, o que o torna
 
 O RSA é vulnerável ao **Algoritmo de Shor**. Essa ameaça exige a futura migração para soluções de **Criptografia Pós-Quântica**.
 
-                                                                Registro de execução
+ #                                                                     Registro de execução
 <img width="1900" height="905" alt="Captura de tela 2025-10-28 191534" src="https://github.com/user-attachments/assets/7918e773-7300-47fe-bc73-7ced2daea40f" />
 
