@@ -8,7 +8,7 @@ use rand::rngs::OsRng;
 use num_bigint::{BigInt, BigUint, RandBigInt, Sign};
 use num_integer::Integer; 
 use num_traits::{One, Zero}; 
-use rand::Rng; 
+ 
 // ... outros imports ...
 
 // --- Helpers / types -------------------------------------------------------
@@ -142,7 +142,7 @@ pub fn generate_keys(bits: usize) -> (PublicKey, PrivateKey) {
 
     // generate two primes p and q
     let half = bits / 2;
-    let mut p = generate_prime(half);
+    let p = generate_prime(half);
     let mut q = generate_prime(bits - half);
 
     // ensure p != q
