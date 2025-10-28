@@ -1,86 +1,116 @@
-# 🔒 Criptografia RSA: Resumo Executivo
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criptografia RSA: Resumo Executivo</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; }
+        h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        h2 { color: #2980b9; margin-top: 30px; }
+        h3 { color: #34495e; }
+        .key-pair strong { color: #e74c3c; }
+        .math-formula { background-color: #ecf0f1; padding: 10px; border-radius: 5px; overflow-x: auto; margin: 15px 0; }
+        .table-container { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #bdc3c7; padding: 12px; text-align: left; }
+        th { background-color: #3498db; color: white; }
+        .note { border-left: 4px solid #f39c12; background-color: #fffaf4; padding: 10px; margin: 15px 0; }
+    </style>
+</head>
+<body>
 
-A Criptografia **RSA** (Rivest, Shamir, Adleman), desenvolvida em 1977/1978, é o sistema de **chave pública (assimétrica)** mais conhecido e amplamente utilizado no mundo.
+    <h1>🔒 Criptografia RSA: Resumo Executivo</h1>
 
-Sua característica fundamental é o uso de um **par de chaves**:
+    <p>A Criptografia RSA (Rivest, Shamir, Adleman), desenvolvida em 1977/1978, é o sistema de **chave pública (assimétrica) mais conhecido e amplamente utilizado no mundo**.</p>
 
-- 🟢 **Chave Pública**: Usada para **criptografar mensagens**. Pode ser distribuída livremente.  
-- 🔒 **Chave Privada**: Usada para **descriptografar mensagens**. Deve ser mantida em segredo absoluto.
+    <p>Sua característica fundamental é o uso de um par de chaves:</p>
+    <ul>
+        <li class="key-pair"><strong>Chave Pública:</strong> Usada para **codificar (criptografar)** mensagens. Pode ser distribuída livremente.</li>
+        <li class="key-pair"><strong>Chave Privada:</strong> Usada para **decodificar (descriptografar)** mensagens. Deve ser mantida em segredo absoluto.</li>
+    </ul>
 
-A segurança do RSA está firmemente ancorada na **Teoria dos Números** e na **Aritmética Modular**.
+    <hr>
 
-O sistema se baseia na escolha de **dois primos distintos e grandes**, `p` e `q`. A segurança é garantida pela dificuldade de fatorar o produto:
+    <h2>1. ⚙️ Princípios Matemáticos (Fundamentos)</h2>
 
-```text
-n = p * q
-O módulo n é o produto dos primos escolhidos:
+    <p>A segurança do RSA está firmemente ancorada na **Teoria dos Números** e na **Aritmética Modular**.</p>
 
-text
-Copiar código
-n = p * q
-A função totiente de Euler é essencial para o cálculo da chave privada:
+    <h3>Números Primos e Fatoração</h3>
+    <p>O sistema se baseia na escolha de dois primos distintos e muito grandes, $p$ e $q$. A segurança é garantida pela **dificuldade computacional de fatorar** o produto $n = p \cdot q$.</p>
 
-text
-Copiar código
-φ(n) = (p - 1)(q - 1)
-O RSA utiliza dois expoentes:
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Componente</th>
+                    <th>Cálculo</th>
+                    <th>Função</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Módulo ($n$)</strong></td>
+                    <td>$n = p \cdot q$</td>
+                    <td>Base da operação (público).</td>
+                </tr>
+                <tr>
+                    <td><strong>Função Totiente de Euler ($\varphi(n)$)</strong></td>
+                    <td>
+                        <div class="math-formula">
+                            $$\varphi(n) = (p-1)(q-1)$$
+                        </div>
+                    </td>
+                    <td>Essencial para o cálculo da chave privada.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-O expoente público e deve ser coprimo com φ(n).
+    <h3>Chaves Públicas e Privadas ($e$ e $d$)</h3>
+    <p>O expoente público $e$ deve ser coprimo com $\varphi(n)$. O expoente privado $d$ é o inverso modular de $e$ módulo $\varphi(n)$, satisfazendo a congruência:</p>
+    <div class="math-formula">
+        $$e \cdot d \equiv 1 \pmod{\varphi(n)}$$
+    </div>
 
-O expoente privado d é o inverso modular de e módulo φ(n):
+    <div class="note">
+        <strong>Algoritmos Auxiliares:</strong> O valor de $d$ é determinado utilizando o **Algoritmo Euclidiano Estendido**.
+    </div>
 
-text
-Copiar código
-e * d ≡ 1 (mod φ(n))
-💡 Obs: O valor de d é calculado usando o Algoritmo Euclidiano Estendido, que permite encontrar o inverso modular de forma eficiente.
+    <hr>
 
-Após a escolha dos primos p e q, geramos:
+    <h2>2. 🔢 Funcionamento (Algoritmo Principal)</h2>
+    <p>Após a escolha dos primos $p$ e $q$, são geradas a Chave Pública $(n, e)$ e a Chave Privada $(n, d)$.</p>
 
-🟢 Chave Pública: (n, e)
+    <h3>Criptografia (Codificação)</h3>
+    <p>O texto cifrado $C$ é obtido a partir da mensagem $M$ (convertida em blocos numéricos) usando a Chave Pública $(n, e)$:</p>
+    <div class="math-formula">
+        $$C \equiv M^e \pmod n$$
+    </div>
 
-🔒 Chave Privada: (n, d)
+    <h3>Descriptografia (Decodificação)</h3>
+    <p>A mensagem original $M$ é recuperada a partir do texto cifrado $C$ usando a Chave Privada $(n, d)$:</p>
+    <div class="math-formula">
+        $$M \equiv C^d \pmod n$$
+    </div>
 
-O texto cifrado C é obtido a partir da mensagem M usando a Chave Pública:
+    <p><strong>Por que funciona?</strong> O método é validado pelo **Teorema de Euler**, que garante a recuperação da mensagem original: $M^{ed} \equiv M \pmod n$.</p>
 
-text
-Copiar código
-C ≡ M^e (mod n)
-A mensagem original M é recuperada usando a Chave Privada:
+    <hr>
 
-text
-Copiar código
-M ≡ C^d (mod n)
-O método é validado pelo Teorema de Euler:
+    <h2>3. 🛡️ Aplicações Práticas e Segurança</h2>
 
-text
-Copiar código
-M^(ed) ≡ M (mod n)
-Isso garante que o destinatário com a chave privada possa restaurar a mensagem original com precisão.
+    <p>O RSA é vital, embora seja mais lento que algoritmos simétricos, o que o torna ideal para uso em **sistemas híbridos**.</p>
 
-Embora o RSA seja mais lento que algoritmos simétricos, ele é ideal para sistemas híbridos, combinando a segurança da chave pública com a velocidade da chave simétrica.
+    <ul>
+        <li><strong>Protocolos de Uso:</strong> É o pilar de segurança em protocolos como **HTTPS e SSH**.</li>
+        <li><strong>Privacidade e Confidencialidade:</strong> Protege a mensagem, garantindo que somente o destinatário legítimo (que possui a chave privada) possa interpretá-la.</li>
+        <li><strong>Autenticação e Assinatura Digital:</strong> Permite a certificação da origem da mensagem. O remetente assina usando sua chave privada, e o destinatário verifica usando a chave pública correspondente.</li>
+        <li><strong>Nível de Segurança Atual:</strong> A segurança depende da inviabilidade da fatoração de $N$. Atualmente, chaves de **2048 bits** são consideradas seguras.</li>
+    </ul>
 
-O RSA é a base de segurança de protocolos essenciais:
+    <h3>Vulnerabilidade Quântica</h3>
+    <p>O RSA é vulnerável ao **Algoritmo de Shor**. Essa ameaça exige a futura migração para soluções de **Criptografia Pós-Quântica**.</p>
 
-HTTPS: Protocolo seguro de comunicação na web
-
-SSH: Acesso remoto seguro a servidores
-
-O RSA garante que somente o destinatário legítimo, que possui a chave privada, consiga interpretar a mensagem.
-
-O RSA permite certificar a origem de mensagens:
-
-O remetente assina a mensagem usando sua chave privada
-
-O destinatário verifica usando a chave pública correspondente
-
-Assim, é possível comprovar que a mensagem não foi alterada e realmente veio do remetente.
-
-A segurança do RSA depende da dificuldade de fatoração de n.
-Atualmente, chaves de 2048 bits são consideradas seguras.
-
-O RSA é vulnerável ao Algoritmo de Shor, que pode fatorar grandes números primos em computadores quânticos.
-Isso exige futura migração para Criptografia Pós-Quântica.
-
-📌 Este documento serve como referência completa para estudo, implementação ou documentação de projetos de segurança com RSA.
-
-<img width="1900" height="905" alt="Captura de tela 2025-10-28 191534" src="https://github.com/user-attachments/assets/9d14a1cf-8ac4-49b7-a66b-86bf5244e2dd" />
+</body>
+</html>
